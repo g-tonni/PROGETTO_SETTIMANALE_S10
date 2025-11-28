@@ -37,7 +37,7 @@ const Search = function () {
   }, [searchCity])
 
   return (
-    <Container className="my-5">
+    <Container className="my-5 min-vh-100">
       <Row className="justify-content-center">
         <Col xs={12} md={8}>
           <Form>
