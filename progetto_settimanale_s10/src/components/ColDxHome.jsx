@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import RiqHome from './RiqHome'
 import CurrentDayHours from './CurrentDayHours'
 import DaysElHome from './DaysElHome'
@@ -46,6 +46,7 @@ const ColDxHome = function () {
 
   const [meteoCity, setMeteoCity] = useState(null)
   const [nuovoArr, setNuovoArr] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const meteoURL =
     'https://api.openweathermap.org/data/2.5/forecast?q=Rome,IT&appid=991e2d0cc5cdb198eddd10696974fba6&units=metric'
@@ -72,9 +73,11 @@ const ColDxHome = function () {
           : []
 
         setNuovoArr(nuovoArr2)
+        setLoading(false)
       })
       .catch((err) => {
         console.log('ERRORE: ', err)
+        setLoading(false)
       })
   }
 
@@ -86,6 +89,12 @@ const ColDxHome = function () {
     <Col xs={12} md={8}>
       <Row>
         <Col xs={12} md={8}>
+          {loading && (
+            <div className="text-center">
+              <Spinner variant="info" animation="border" />
+            </div>
+          )}
+
           {meteoCity && (
             <RiqHome
               giorno={dataEOra(meteoCity.list[0].dt_txt).dataForm}
@@ -103,6 +112,11 @@ const ColDxHome = function () {
           md={4}
           className="d-flex flex-column justify-content-between "
         >
+          {loading && (
+            <div className="text-center">
+              <Spinner variant="info" animation="border" />
+            </div>
+          )}
           {meteoCity &&
             meteoCity.list.slice(1, 4).map((element) => {
               return (
@@ -118,6 +132,11 @@ const ColDxHome = function () {
       </Row>
       <Row>
         <Col xs={12}>
+          {loading && (
+            <div className="text-center">
+              <Spinner variant="info" animation="border" />
+            </div>
+          )}
           {meteoCity &&
             nuovoArr.slice(1, 6).map((element) => {
               return (

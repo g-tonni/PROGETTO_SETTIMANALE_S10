@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Spinner } from 'react-bootstrap'
 
 const ColSxHome = function ({ citta, margin }) {
   const [meteoCities, setMeteoCities] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const meteoURL = `https://api.openweathermap.org/data/2.5/weather?q=${citta},IT&appid=991e2d0cc5cdb198eddd10696974fba6&units=metric`
 
@@ -18,9 +20,11 @@ const ColSxHome = function ({ citta, margin }) {
       .then((data) => {
         // console.log(data)
         setMeteoCities(data)
+        setLoading(false)
       })
       .catch((err) => {
         console.log('ERRORE: ', err)
+        setLoading(false)
       })
   }
 
@@ -31,6 +35,11 @@ const ColSxHome = function ({ citta, margin }) {
 
   return (
     <>
+      {loading && (
+        <div className="text-center">
+          <Spinner variant="info" animation="border" />
+        </div>
+      )}
       {meteoCities && (
         <Link
           to={`/details/${meteoCities.name},IT`}

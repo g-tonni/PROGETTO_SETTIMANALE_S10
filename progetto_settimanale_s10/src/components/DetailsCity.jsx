@@ -1,4 +1,4 @@
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import DetailsHours from './DetailsHours'
@@ -46,6 +46,7 @@ const DetailsCity = function () {
   const params = useParams()
 
   const [meteoCity, setMeteoCity] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const meteoURL = `https://api.openweathermap.org/data/2.5/forecast?q=${params.citta}&appid=991e2d0cc5cdb198eddd10696974fba6&units=metric`
 
@@ -61,9 +62,11 @@ const DetailsCity = function () {
       .then((data) => {
         console.log(data)
         setMeteoCity(data)
+        setLoading(false)
       })
       .catch((err) => {
         console.log('ERRORE: ', err)
+        setLoading(false)
       })
   }
 
@@ -74,6 +77,11 @@ const DetailsCity = function () {
 
   return (
     <Container className="text-light">
+      {loading && (
+        <div className="text-center">
+          <Spinner variant="info" animation="border" />
+        </div>
+      )}
       {meteoCity && (
         <Row className="justify-content-center my-5">
           <Col xs={12} md={8}>
@@ -124,10 +132,16 @@ const DetailsCity = function () {
             </div>
           </Col>
           <Col xs={12} md={8} className="p-0">
+            {loading && (
+              <div className="text-center">
+                <Spinner variant="info" animation="border" />
+              </div>
+            )}
             {meteoCity &&
               meteoCity.list.slice(1, meteoCity.list.length).map((element) => {
                 return (
                   <DetailsHours
+                    key={element.dt}
                     icona={element.weather[0].icon}
                     data={dataEOra(element.dt_txt).dataForm}
                     ora={dataEOra(element.dt_txt).oraForm}
