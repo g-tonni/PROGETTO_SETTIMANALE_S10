@@ -1,0 +1,22 @@
+#root {
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #274969,
+    #4d7f9b,
+    #7cb9ce,
+    #b2f5ff
+  );
+  min-height: 100vh;
+}
+
+.sfondo-blur {
+  background-image: linear-gradient(to right top, #05193700, #b2f5ff24);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.243);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  margin: 0;
+}
