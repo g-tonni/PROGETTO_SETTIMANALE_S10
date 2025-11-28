@@ -53,6 +53,19 @@ const Search = function () {
         </Col>
       </Row>
       <Row className="justify-content-center mt-5">
+        {searchCity === '' && (
+          <div className="text-center sfondo-blur p-5 text-light rounded-4 w-50">
+            <p className="fs-4">Search your City!</p>
+          </div>
+        )}
+        {!meteoCity && searchCity !== '' && (
+          <div className="text-center sfondo-blur p-5 text-light rounded-4 w-50">
+            <p className="fs-4">
+              OOPS! <br /> There are no results for your search! <br /> Try
+              again!
+            </p>
+          </div>
+        )}
         {meteoCity && <SearchCard citta={meteoCity.name} />}
       </Row>
     </Container>
