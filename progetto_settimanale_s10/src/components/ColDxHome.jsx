@@ -5,6 +5,45 @@ import CurrentDayHours from './CurrentDayHours'
 import DaysElHome from './DaysElHome'
 
 const ColDxHome = function () {
+  const dataEOra = function (data) {
+    const dt = data
+
+    let dataOra = {
+      dataForm: '',
+      oraForm: '',
+    }
+
+    const dateObj = new Date(dt)
+
+    const mesi = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ]
+
+    const giorno = dateObj.getDate()
+    const mese = mesi[dateObj.getMonth()]
+    const anno = dateObj.getFullYear()
+
+    const ore = String(dateObj.getHours()).padStart(2, '0')
+    const minuti = String(dateObj.getMinutes()).padStart(2, '0')
+
+    // eslint-disable-next-line no-unused-vars
+    return (dataOra = {
+      dataForm: `${giorno} ${mese} ${anno}`,
+      oraForm: `${ore}:${minuti}`,
+    })
+  }
+
   const [meteoCity, setMeteoCity] = useState(null)
   const [nuovoArr, setNuovoArr] = useState([])
 
@@ -49,9 +88,11 @@ const ColDxHome = function () {
         <Col xs={12} md={8}>
           {meteoCity && (
             <RiqHome
+              giorno={dataEOra(meteoCity.list[0].dt_txt).dataForm}
+              cittaLink={`${meteoCity.city.name},IT`}
               citta={meteoCity.city.name}
               temp={meteoCity.list[0].main.temp}
-              des={meteoCity.list[0].weather[0].description}
+              des={meteoCity.list[0].weather[0].main}
               max={meteoCity.list[0].main.temp_max}
               min={meteoCity.list[0].main.temp_min}
             />
@@ -67,7 +108,7 @@ const ColDxHome = function () {
               return (
                 <CurrentDayHours
                   key={element.dt}
-                  orario={element.dt_txt}
+                  orario={dataEOra(element.dt_txt).oraForm}
                   icona={element.weather[0].icon}
                   temp={element.main.temp}
                 />
@@ -82,7 +123,7 @@ const ColDxHome = function () {
               return (
                 <DaysElHome
                   key={element.dt}
-                  giorno={element.dt_txt}
+                  giorno={dataEOra(element.dt_txt).dataForm}
                   temp={element.main.temp}
                   icona={element.weather[0].icon}
                 />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const ColSxHome = function ({ citta, margin }) {
   const [meteoCities, setMeteoCities] = useState(null)
@@ -29,26 +30,27 @@ const ColSxHome = function ({ citta, margin }) {
   }, [meteoCities])
 
   return (
-    <div
-      className={
-        'd-flex justify-content-between align-items-center sfondo-blur rounded-4 p-3 flex-grow-1' +
-        (margin === 'Si' ? ' mb-3' : ' m-0')
-      }
-    >
+    <>
       {meteoCities && (
-        <>
-          <p className="m-0">{meteoCities.name}</p>
+        <Link
+          to={`/details/${meteoCities.name},IT`}
+          className={
+            'd-flex justify-content-between align-items-center sfondo-blur rounded-4 p-3 flex-grow-1 text-decoration-none text-light' +
+            (margin === 'Si' ? ' mb-3' : ' m-0')
+          }
+        >
+          <p className="m-0 fs-4 fw-bold">{meteoCities.name}</p>
           <div className="d-flex align-items-center justify-content-end">
-            <p className="m-0 me-3">{meteoCities.main.temp}°</p>{' '}
+            <p className="m-0 me-3 fs-5">{meteoCities.main.temp}°</p>{' '}
             <img
               alt="icona-meteo"
               src={`https://openweathermap.org/img/wn/${meteoCities.weather[0].icon}@2x.png`}
               className="m-0 w-25"
             />
           </div>
-        </>
+        </Link>
       )}
-    </div>
+    </>
   )
 }
 

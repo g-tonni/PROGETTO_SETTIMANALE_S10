@@ -1,12 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
+import DetailsCity from './components/DetailsCity'
+import NotFound from './components/NotFound'
+import MeteoNavbar from './components/MeteoNavbar'
+import Search from './components/Search'
 
 function App() {
   return (
-    <div>
-      <Home />
-    </div>
+    <BrowserRouter>
+      <MeteoNavbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/details/:citta" element={<DetailsCity />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
