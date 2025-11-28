@@ -22,13 +22,13 @@ const DetailsHours = function ({
         </div>
       </div>
       <div className="flex-grow-1 ms-4 text-end">
-        <p>{temp}</p>
+        <p className="fs-4 fw-bold">{temp}°</p>
         <p className="fw-bold mb-2 fs-5">Min and Max</p>
         <p className="">
           {min}° | {max}°
         </p>
         <p>
-          {wMain}: {description}
+          <span className="fw-bold fs-5">{wMain}:</span> {description}
         </p>
         <p>
           <span className="fw-bold fs-5">Clouds:</span> {all}%
