@@ -6,6 +6,7 @@ import DetailsCity from './components/DetailsCity'
 import NotFound from './components/NotFound'
 import MeteoNavbar from './components/MeteoNavbar'
 import Search from './components/Search'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }

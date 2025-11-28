@@ -17,6 +17,10 @@
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
+.sfondo-footer {
+  background-color: #051937;
+}
+
 p {
   margin: 0;
 }
